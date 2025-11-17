@@ -20,7 +20,7 @@ const Header = () => {
               <button className="navbar-button">Meu Perfil</button>
             </li>
             <li className="navbar-item">
-              <button className="navbar-button login-button">Entrar</button>
+              <button className="outline-btn">Entrar</button>
             </li>
           </ul>
         </nav>
