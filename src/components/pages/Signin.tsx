@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../assets/css/Login.css";
 
 type SigninFormType = {
@@ -9,7 +10,16 @@ type SigninFormType = {
   confirm_password: string;
 };
 
+type SigninFormValidationType = {
+  email: boolean;
+  username: boolean;
+  password: boolean;
+  confirm_password: boolean;
+};
+
 const Signin = () => {
+  const navigate = useNavigate();
+
   const [formdata, setFormdata] = useState<SigninFormType>({
     email: "",
     username: "",
@@ -17,18 +27,80 @@ const Signin = () => {
     confirm_password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormdata((prev: SigninFormType) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
+  const [formValidation, setFormValidation] =
+    useState<SigninFormValidationType>({
+      email: false,
+      username: false,
+      password: false,
+      confirm_password: false,
     });
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFormValidation((prev) => ({
+      ...prev,
+      [e.target.name]: false,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormdata((prev: SigninFormType) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const checkExists = async (field: string, value: string) => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_BACKEND_URL}/api/users/${field}?${field}=${value}`
+    );
+    return !!data;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formdata);
+    let valid = true;
+
+    // realiza as duas cehcagens simultâneamente
+    const [emailExists, usernameExists] = await Promise.all([
+      checkExists("email", formdata.email),
+      checkExists("username", formdata.username),
+    ]);
+
+    if (emailExists) {
+      valid = false;
+      setFormValidation((prev) => ({
+        ...prev,
+        email: true,
+      }));
+    }
+
+    if (usernameExists) {
+      valid = false;
+      setFormValidation((prev) => ({
+        ...prev,
+        username: true,
+      }));
+    }
+
+    if (formdata.password != formdata.confirm_password) {
+      setFormValidation((prev) => ({
+        ...prev,
+        confirm_password: true,
+      }));
+      valid = false;
+    }
+
+    if (valid) {
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/users`,
+          formdata
+        );
+        navigate("/login");
+      } catch (e) {
+        window.alert(`Erro ao criar a conta: ${e}`);
+      }
+    }
   };
 
   return (
@@ -47,11 +119,19 @@ const Signin = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
+            <p
+              className={`form-warning ${
+                formValidation.email ? "invalid-input" : ""
+              }`}
+            >
+              Email já cadastrado*
+            </p>
           </div>
           <div className="form-input-container">
             <label htmlFor="user" className="login-label">
-              Usuário:
+              Username:
             </label>
             <input
               type="text"
@@ -60,7 +140,15 @@ const Signin = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
+            <p
+              className={`form-warning ${
+                formValidation.username ? "invalid-input" : ""
+              }`}
+            >
+              Username já cadastrado*
+            </p>
           </div>
           <div className="form-input-container">
             <label htmlFor="password" className="login-label">
@@ -73,11 +161,12 @@ const Signin = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
           </div>
           <div className="form-input-container">
             <label htmlFor="confirm_password" className="login-label">
-              Senha:
+              Confirme sua senha:
             </label>
             <input
               type="password"
@@ -86,7 +175,15 @@ const Signin = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
+            <p
+              className={`form-warning ${
+                formValidation.confirm_password ? "invalid-input" : ""
+              }`}
+            >
+              As senhas não conferem*
+            </p>
           </div>
           <div className="submit-btn-container">
             <button className="outline-btn">Cadastrar</button>

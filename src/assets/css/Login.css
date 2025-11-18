@@ -26,12 +26,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 1.5em;
 }
 
 .login-form-container .login-form .form-input-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .login-form .login-label {
@@ -58,4 +59,17 @@
 .login-form .submit-btn-container {
   display: flex;
   justify-content: end;
+}
+
+.form-warning {
+  position: absolute;
+  bottom: -1.5em;
+  color: red;
+  font-size: 0.8em;
+  margin: 0;
+  visibility: hidden;
+}
+
+.form-warning.invalid-input {
+  visibility: visible;
 }
