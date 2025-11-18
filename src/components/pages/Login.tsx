@@ -24,9 +24,10 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formdata);
+    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/login?user=${formdata.user}&password=${formdata.password}`)
+    console.log(data);
   };
 
   return (

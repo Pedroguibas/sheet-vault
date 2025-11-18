@@ -6,8 +6,8 @@ import Signin from "./components/pages/Signin.tsx";
 const App = () => {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/login/" element={<Login />} />
           <Route path="/signin/" element={<Signin />} />

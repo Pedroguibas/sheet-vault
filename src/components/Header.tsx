@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import "../assets/css/Header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (url: string) => {
+    navigate(url);
+  }
+
   return (
     <header>
       <div className="header-container">
@@ -20,7 +27,7 @@ const Header = () => {
               <button className="navbar-button">Meu Perfil</button>
             </li>
             <li className="navbar-item">
-              <button className="outline-btn">Entrar</button>
+              <button onClick={() => handleClick("/login")} className="outline-btn">Entrar</button>
             </li>
           </ul>
         </nav>
