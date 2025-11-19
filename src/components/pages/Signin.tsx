@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import type { SessionType, SetSessionUpdateType } from "../../App";
 import "../../assets/css/Login.css";
 
 type SigninFormType = {
@@ -17,8 +18,14 @@ type SigninFormValidationType = {
   confirm_password: boolean;
 };
 
-const Signin = () => {
+type SigninProps = {
+  session: SessionType;
+  setSessionUpdate: SetSessionUpdateType;
+};
+
+const Signin = ({ session, setSessionUpdate }: SigninProps) => {
   const navigate = useNavigate();
+  if (session) navigate("/");
 
   const [formdata, setFormdata] = useState<SigninFormType>({
     email: "",
@@ -55,6 +62,10 @@ const Signin = () => {
     );
     return !!data;
   };
+
+  useEffect(() => {
+    if (session) navigate("/");
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +107,18 @@ const Signin = () => {
           `${import.meta.env.VITE_BACKEND_URL}/api/users`,
           formdata
         );
-        navigate("/login");
+
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/login`,
+          {
+            user: formdata.username,
+            password: formdata.password,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        setSessionUpdate((prev) => prev + 1);
       } catch (e) {
         window.alert(`Erro ao criar a conta: ${e}`);
       }

@@ -1,19 +1,29 @@
 import { Link } from "react-router-dom";
-import "../../assets/css/Login.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import type React from "react";
+import type { SessionType, SetSessionUpdateType } from "../../App";
+import "../../assets/css/Login.css";
 
 type LoginFormType = {
   user: string;
   password: string;
 };
 
-const Login = () => {
+type LoginProps = {
+  session: SessionType;
+  setSessionUpdate: SetSessionUpdateType;
+};
+
+const Login = ({ session, setSessionUpdate }: LoginProps) => {
+  const navigate = useNavigate();
+
   const [formdata, setFormdata] = useState<LoginFormType>({
     user: "",
     password: "",
   });
+  const [invalid, setInvalid] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormdata((prev: LoginFormType) => {
@@ -24,10 +34,28 @@ const Login = () => {
     });
   };
 
+  useEffect(() => {
+    if (session) navigate("/");
+  }, []);
+
+  const handleFocus = () => setInvalid(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/login?user=${formdata.user}&password=${formdata.password}`)
-    console.log(data);
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/login`,
+        formdata,
+        { withCredentials: true }
+      );
+      setSessionUpdate((prev) => prev + 1);
+      navigate("/");
+    } catch (e) {
+      console.error(e);
+      if (axios.isAxiosError(e)) {
+        if (e.status == 401) setInvalid(true);
+      }
+    }
   };
 
   return (
@@ -46,6 +74,7 @@ const Login = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
           </div>
           <div className="form-input-container">
@@ -59,7 +88,11 @@ const Login = () => {
               required
               className="login-input"
               onChange={handleChange}
+              onFocus={handleFocus}
             />
+            <p className={`form-warning ${invalid ? "invalid-input" : ""}`}>
+              Usuário ou senha inválidos*
+            </p>
           </div>
           <div className="submit-btn-container">
             <button className="outline-btn">Entrar</button>
