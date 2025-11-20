@@ -1,0 +1,27 @@
+.sheet-card {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--text-tertiary);
+  border-radius: 1em;
+  transition: all 300ms ease-in-out;
+}
+
+.sheet-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--text-primary);
+  transition: all 300ms ease-in-out;
+}
+
+.sheet-card .character-name {
+  font-size: 1.2em;
+}
+
+.sheet-card .character-info {
+  padding-top: 1em;
+  border-top: 1px solid var(--text-tertiary);
+  display: flex;
+  gap: 2em;
+  font-size: 0.9em;
+}

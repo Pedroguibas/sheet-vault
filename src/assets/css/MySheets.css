@@ -1,0 +1,65 @@
+.my-sheets-section,
+.no-sheets-warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nova-ficha-container {
+  display: flex;
+  justify-content: end;
+}
+
+.nova-ficha-container .nova-ficha-btn {
+  padding: 0.3em 0.8em;
+  border-radius: 0.5em;
+  background: var(--highlight);
+  transition: background 300ms ease;
+}
+
+.nova-ficha-container .nova-ficha-btn:hover {
+  background: var(--highlight-darker);
+  transition: background 300ms ease;
+}
+
+.my-sheets-section .sheet-list-container {
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > * {
+    width: inherit;
+  }
+}
+
+.sheet-list-container .sheet-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+}
+
+@media (width >= 40rem) {
+  .sheet-list-container .sheet-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width >= 48rem) {
+  .my-sheets-section .sheet-list-container {
+    width: 80vw;
+  }
+
+  .sheet-list-container .sheet-list {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & li {
+      width: 100%;
+    }
+  }
+}
+
+@media (width >= 64rem) {
+  .sheet-list-container .sheet-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
+import PublicOnly from "./components/shared/PublicOnly.tsx";
+import PrivateOnly from "./components/shared/PrivateOnly.tsx";
 import Header from "./components/Header.tsx";
 import Login from "./components/pages/Login.tsx";
 import Signin from "./components/pages/Signin.tsx";
 import Home from "./components/pages/Home.tsx";
+import MySheet from "./components/pages/MySheets.tsx";
 
 export type SessionType =
   | {
@@ -46,13 +49,25 @@ const App = () => {
         <Route
           path="/login/"
           element={
-            <Login session={session} setSessionUpdate={setSessionUpdate} />
+            <PublicOnly session={session}>
+              <Login setSessionUpdate={setSessionUpdate} />
+            </PublicOnly>
           }
         />
         <Route
           path="/signin/"
           element={
-            <Signin session={session} setSessionUpdate={setSessionUpdate} />
+            <PublicOnly session={session}>
+              <Signin setSessionUpdate={setSessionUpdate} />
+            </PublicOnly>
+          }
+        />
+        <Route
+          path="/minhasfichas/"
+          element={
+            <PrivateOnly session={session}>
+              <MySheet session={session} />
+            </PrivateOnly>
           }
         />
         <Route path="/" element={<Home />} />

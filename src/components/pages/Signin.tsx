@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import type { SessionType, SetSessionUpdateType } from "../../App";
+import type { SetSessionUpdateType } from "../../App";
 import "../../assets/css/Login.css";
 
 type SigninFormType = {
@@ -19,14 +19,10 @@ type SigninFormValidationType = {
 };
 
 type SigninProps = {
-  session: SessionType;
   setSessionUpdate: SetSessionUpdateType;
 };
 
-const Signin = ({ session, setSessionUpdate }: SigninProps) => {
-  const navigate = useNavigate();
-  if (session) navigate("/");
-
+const Signin = ({ setSessionUpdate }: SigninProps) => {
   const [formdata, setFormdata] = useState<SigninFormType>({
     email: "",
     username: "",
@@ -62,10 +58,6 @@ const Signin = ({ session, setSessionUpdate }: SigninProps) => {
     );
     return !!data;
   };
-
-  useEffect(() => {
-    if (session) navigate("/");
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
