@@ -1,0 +1,75 @@
+.login-section {
+  display: flex;
+  justify-content: center;
+}
+
+.login-section .login-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 1.5em;
+  margin: 8em 0;
+  border-radius: 1.5em;
+  background: var(--bg-secondary);
+}
+
+.login-form-container .login-p .link {
+  color: var(--highlight);
+}
+
+.login-section .login-form-container .login-p {
+  font-size: 0.9em;
+  width: 100%;
+}
+
+.login-section .login-form-container .login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.login-form-container .login-form .form-input-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.login-form .login-label {
+  font-size: 0.8em;
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+
+.login-form-container .login-form .login-input {
+  all: unset;
+  width: 20rem;
+  background: var(--bg-primary);
+  border: 2px solid var(--text-tertiary);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  transition: border 300ms ease;
+}
+
+.login-form-container .login-form .login-input:focus {
+  border-color: var(--highlight);
+  transition: border 300ms ease;
+}
+
+.login-form .submit-btn-container {
+  display: flex;
+  justify-content: end;
+}
+
+.form-warning {
+  position: absolute;
+  bottom: -1.5em;
+  color: red;
+  font-size: 0.8em;
+  margin: 0;
+  visibility: hidden;
+}
+
+.form-warning.invalid-input {
+  visibility: visible;
+}

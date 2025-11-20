@@ -1,6 +1,33 @@
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import type { SessionType, SetSessionUpdateType } from "../App.tsx";
 import "../assets/css/Header.css";
 
-const Header = () => {
+type HeaderProps = {
+  session: SessionType;
+  setSessionUpdate: SetSessionUpdateType;
+};
+
+const Header = ({ session, setSessionUpdate }: HeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = (url: string) => {
+    navigate(url);
+  };
+
+  const handleLogout = async () => {
+    await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    setSessionUpdate((prev) => prev + 1);
+  };
+
+  console.log(session);
+
   return (
     <header>
       <div className="header-container">
@@ -19,9 +46,22 @@ const Header = () => {
             <li className="navbar-item">
               <button className="navbar-button">Meu Perfil</button>
             </li>
-            <li className="navbar-item">
-              <button className="navbar-button login-button">Entrar</button>
-            </li>
+            {session ? (
+              <li className="navbar-item">
+                <button onClick={handleLogout} className="outline-btn">
+                  Sair
+                </button>
+              </li>
+            ) : (
+              <li className="navbar-item">
+                <button
+                  onClick={() => handleClick("/login")}
+                  className="outline-btn"
+                >
+                  Entrar
+                </button>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

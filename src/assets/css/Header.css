@@ -35,13 +35,3 @@ header .header-container {
   background: var(--bg-secondary);
   transition: all 300ms ease;
 }
-
-.navbar-list .navbar-item .login-button {
-  border: 1px solid var(--highlight);
-  color: var(--highlight);
-}
-
-.navbar-list .navbar-item .login-button:hover {
-  background: var(--highlight);
-  color: white;
-}

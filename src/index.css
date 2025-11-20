@@ -4,7 +4,7 @@
   --text-primary: hsl(0, 0%, 100%);
   --text-secondary: hsl(0, 0%, 80%);
   --text-tertiary: hsl(0, 0%, 65%);
-  --highlight: hsl(0, 50%, 45%);
+  --highlight: hsl(0, 100%, 40%);
 
   background: var(--bg-primary);
 }
@@ -20,4 +20,20 @@ button {
 * {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text-primary);
+}
+
+.outline-btn {
+  width: fit-content;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
+  transition: all 300ms ease;
+}
+
+.outline-btn:hover {
+  background: var(--highlight);
+  color: white;
+  transition: all 300ms ease;
 }
