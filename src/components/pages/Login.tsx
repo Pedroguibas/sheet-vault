@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import type React from "react";
-import type { SessionType, SetSessionUpdateType } from "../../App";
+import type { SetSessionUpdateType } from "../../App";
 import "../../assets/css/Login.css";
 
 type LoginFormType = {
@@ -12,13 +11,10 @@ type LoginFormType = {
 };
 
 type LoginProps = {
-  session: SessionType;
   setSessionUpdate: SetSessionUpdateType;
 };
 
-const Login = ({ session, setSessionUpdate }: LoginProps) => {
-  const navigate = useNavigate();
-
+const Login = ({ setSessionUpdate }: LoginProps) => {
   const [formdata, setFormdata] = useState<LoginFormType>({
     user: "",
     password: "",
@@ -33,11 +29,6 @@ const Login = ({ session, setSessionUpdate }: LoginProps) => {
       };
     });
   };
-
-  useEffect(() => {
-    if (session) navigate("/");
-  }, []);
-
   const handleFocus = () => setInvalid(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,9 +40,7 @@ const Login = ({ session, setSessionUpdate }: LoginProps) => {
         { withCredentials: true }
       );
       setSessionUpdate((prev) => prev + 1);
-      navigate("/");
     } catch (e) {
-      console.error(e);
       if (axios.isAxiosError(e)) {
         if (e.status == 401) setInvalid(true);
       }

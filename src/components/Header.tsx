@@ -26,8 +26,6 @@ const Header = ({ session, setSessionUpdate }: HeaderProps) => {
     setSessionUpdate((prev) => prev + 1);
   };
 
-  console.log(session);
-
   return (
     <header>
       <div className="header-container">
@@ -41,7 +39,12 @@ const Header = ({ session, setSessionUpdate }: HeaderProps) => {
         <nav className="navbar">
           <ul className="navbar-list">
             <li className="navbar-item">
-              <button className="navbar-button">Minhas Fichas</button>
+              <button
+                onClick={() => handleClick("/minhasfichas/")}
+                className="navbar-button"
+              >
+                Minhas Fichas
+              </button>
             </li>
             <li className="navbar-item">
               <button className="navbar-button">Meu Perfil</button>
