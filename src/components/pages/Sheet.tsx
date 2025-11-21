@@ -9,6 +9,7 @@ import type { SessionType } from "../../App.tsx";
 import type React from "react";
 import "../../assets/css/Sheet.css";
 import SheetArrayItem from "../Sheet/SheetArrayItem.tsx";
+import CharacterInfo from "../Sheet/CharacterInfo.tsx";
 
 type SheetPropsType = {
   session: SessionType;
@@ -104,6 +105,7 @@ const Sheet = ({ session }: SheetPropsType) => {
     return (
       <section className="sheet-section section-container">
         <div className="sheet">
+          <CharacterInfo sheet={sheet} setSheet={setSheet} />
           <div className="sheet-abilities-and-skills">
             <div className="sheet-abilities">
               <Ability
