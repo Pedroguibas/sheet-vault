@@ -1,0 +1,6 @@
+.skill-checkbox {
+  display: flex;
+  align-items: start;
+  gap: 0.5em;
+  font-size: 0.7em;
+}

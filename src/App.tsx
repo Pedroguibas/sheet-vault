@@ -72,7 +72,14 @@ const App = () => {
               </PrivateOnly>
             }
           />
-          <Route path="/ficha/" element={<Sheet />} />
+          <Route
+            path="/ficha/"
+            element={
+              <PrivateOnly session={session}>
+                <Sheet session={session} />
+              </PrivateOnly>
+            }
+          />
           <Route path="/" element={<Home />} />
         </Routes>
       </main>
