@@ -8,6 +8,7 @@ import Login from "./components/pages/Login.tsx";
 import Signin from "./components/pages/Signin.tsx";
 import Home from "./components/pages/Home.tsx";
 import MySheet from "./components/pages/MySheets.tsx";
+import Sheet from "./components/pages/Sheet.tsx";
 
 export type SessionType =
   | {
@@ -45,33 +46,36 @@ const App = () => {
   return (
     <>
       <Header session={session} setSessionUpdate={setSessionUpdate} />
-      <Routes>
-        <Route
-          path="/login/"
-          element={
-            <PublicOnly session={session}>
-              <Login setSessionUpdate={setSessionUpdate} />
-            </PublicOnly>
-          }
-        />
-        <Route
-          path="/signin/"
-          element={
-            <PublicOnly session={session}>
-              <Signin setSessionUpdate={setSessionUpdate} />
-            </PublicOnly>
-          }
-        />
-        <Route
-          path="/minhasfichas/"
-          element={
-            <PrivateOnly session={session}>
-              <MySheet session={session} />
-            </PrivateOnly>
-          }
-        />
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route
+            path="/login/"
+            element={
+              <PublicOnly session={session}>
+                <Login setSessionUpdate={setSessionUpdate} />
+              </PublicOnly>
+            }
+          />
+          <Route
+            path="/signin/"
+            element={
+              <PublicOnly session={session}>
+                <Signin setSessionUpdate={setSessionUpdate} />
+              </PublicOnly>
+            }
+          />
+          <Route
+            path="/minhasfichas/"
+            element={
+              <PrivateOnly session={session}>
+                <MySheet session={session} />
+              </PrivateOnly>
+            }
+          />
+          <Route path="/ficha/" element={<Sheet />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </main>
     </>
   );
 };

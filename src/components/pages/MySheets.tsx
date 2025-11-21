@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SheetCard from "./SheetCard";
-import type { SessionType } from "../../App";
+import SheetCard from "../SheetCard.tsx";
+import type { SessionType } from "../../App.tsx";
 import "../../assets/css/MySheets.css";
 
 export type SheetType = {
@@ -75,14 +75,12 @@ export type SheetType = {
       successes: number;
       failures: number;
     };
-    attacks_and_spells: [
-      {
-        attack_name: string;
-        attack_bonus: number;
-        damage: number;
-        damage_type: string;
-      }
-    ];
+    attacks_and_spells: {
+      attack_name: string;
+      attack_bonus: number;
+      damage: number;
+      damage_type: string;
+    }[];
   };
   bag: {
     money: {
@@ -125,7 +123,7 @@ const MySheet = ({ session }: MySheetPropsType) => {
   return (
     <section className="my-sheets-section">
       <h1>Minhas Fichas</h1>
-      <div className="sheet-list-container">
+      <div className="sheet-list-container section-container">
         <div className="nova-ficha-container">
           <button className="nova-ficha-btn">Nova Ficha</button>
         </div>

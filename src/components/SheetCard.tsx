@@ -1,5 +1,5 @@
-import type { SheetType } from "./MySheets";
-import "../../assets/css/SheetCard.css";
+import type { SheetType } from "./pages/MySheets";
+import "../assets/css/SheetCard.css";
 import { useNavigate } from "react-router-dom";
 
 type SheetCardPropsType = {
@@ -10,7 +10,7 @@ const SheetCard = ({ sheet }: SheetCardPropsType) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/ficha/${sheet._id}`);
+    navigate(`/ficha?sheet=${sheet._id}`);
   };
 
   return (
