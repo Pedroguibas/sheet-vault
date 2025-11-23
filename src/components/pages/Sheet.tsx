@@ -21,6 +21,7 @@ type SheetPropsType = {
 const Sheet = ({ session }: SheetPropsType) => {
   const navigate = useNavigate();
   const [sheet, setSheet] = useState<SheetType>();
+  const [lastUpdatedSheet, setLastUpdatedSheet] = useState<SheetType>();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -33,10 +34,27 @@ const Sheet = ({ session }: SheetPropsType) => {
       if (data.player_id != session!.userId) navigate("/");
 
       setSheet(data);
+      setLastUpdatedSheet(data);
     };
 
     fetchSheet();
   }, []);
+
+  setInterval(async () => {
+    try {
+      if (lastUpdatedSheet != sheet) {
+        await axios.patch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/sheets/${searchParams.get(
+            "sheet"
+          )}`,
+          sheet
+        );
+        setLastUpdatedSheet(sheet);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, 5000);
 
   const handleAbilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number(e.target.value) >= 0 && Number(e.target.value) <= 99) {
@@ -48,13 +66,6 @@ const Sheet = ({ session }: SheetPropsType) => {
         },
       }));
     }
-  };
-
-  const handleBaseStringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSheet((prev) => ({
-      ...prev!,
-      [e.target.name]: e.target.value,
-    }));
   };
 
   const handleBaseNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,10 +114,6 @@ const Sheet = ({ session }: SheetPropsType) => {
       };
     });
   };
-
-  useEffect(() => {
-    if (sheet) console.log(sheet.combat.attacks_and_spells);
-  }, [sheet]);
 
   if (sheet) {
     return (

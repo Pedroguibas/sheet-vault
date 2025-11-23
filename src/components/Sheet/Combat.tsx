@@ -115,7 +115,7 @@ const Combat = ({ sheet, setSheet }: CombatPropsType) => {
           value={sheet.combat.hp.temporary_hp}
           onChange={handleHPChange}
         />
-        <label htmlFor="temporary_hp">PV atual</label>
+        <label htmlFor="temporary_hp">PV temporário</label>
       </div>
       <div className="death-saves-container">
         <div className="hp-dice">
