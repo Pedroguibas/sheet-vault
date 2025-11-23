@@ -1,6 +1,7 @@
 .sheet-card {
   width: 100%;
   padding: 1em;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--text-tertiary);
@@ -15,7 +16,7 @@
 }
 
 .sheet-card .character-name {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 .sheet-card .character-info {

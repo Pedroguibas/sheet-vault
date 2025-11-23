@@ -3,6 +3,7 @@ import axios from "axios";
 import SheetCard from "../SheetCard.tsx";
 import type { SessionType } from "../../App.tsx";
 import "../../assets/css/MySheets.css";
+import { useNavigate } from "react-router-dom";
 
 export type SheetType = {
   _id: string;
@@ -99,6 +100,7 @@ type MySheetPropsType = {
 };
 
 const MySheet = ({ session }: MySheetPropsType) => {
+  const navigate = useNavigate();
   const [sheets, setSheets] = useState<SheetType[]>([]);
 
   useEffect(() => {
@@ -125,14 +127,17 @@ const MySheet = ({ session }: MySheetPropsType) => {
       <h1>Minhas Fichas</h1>
       <div className="sheet-list-container section-container">
         <div className="nova-ficha-container">
-          <button className="nova-ficha-btn">Nova Ficha</button>
+          <button
+            onClick={() => navigate("/novaficha")}
+            className="nova-ficha-btn"
+          >
+            Nova Ficha
+          </button>
         </div>
         {sheets.length > 0 ? (
           <ul className="sheet-list">
             {sheets.map((sheet, i) => (
-              <li key={i}>
-                <SheetCard sheet={sheet} />
-              </li>
+              <SheetCard sheet={sheet} key={i} />
             ))}
           </ul>
         ) : (

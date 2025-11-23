@@ -9,6 +9,7 @@ import Signin from "./components/pages/Signin.tsx";
 import Home from "./components/pages/Home.tsx";
 import MySheet from "./components/pages/MySheets.tsx";
 import Sheet from "./components/pages/Sheet.tsx";
+import NewSheet from "./components/pages/NewSheet.tsx";
 
 export type SessionType =
   | {
@@ -80,6 +81,7 @@ const App = () => {
               </PrivateOnly>
             }
           />
+          <Route path="novaficha" element={<NewSheet session={session} />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </main>

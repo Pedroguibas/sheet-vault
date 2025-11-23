@@ -32,6 +32,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1em;
+  padding: 0;
 }
 
 @media (width >= 40rem) {
