@@ -1,0 +1,98 @@
+.sheet {
+  max-width: 45rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.sheet .sheet-textarea {
+  field-sizing: content;
+  padding: 4px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--text-primary);
+  resize: none;
+}
+
+.sheet-abilities-and-skills {
+  display: grid;
+  column-count: 2;
+  grid-template-columns: 1fr 2fr;
+  gap: 1em;
+}
+
+.sheet-abilities,
+.sheet-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.sheet-skills .sheet-inspiration,
+.sheet-skills .sheet-proficiency,
+.wisdom-and-proficiencies .passive-wisdom {
+  border: 1px solid var(--text-primary);
+  padding: 2px;
+}
+
+.sheet-skills .sheet-inspiration input,
+.sheet-skills .sheet-proficiency input,
+.passive-wisdom input {
+  width: 20%;
+  aspect-ratio: 1/1;
+  text-align: center;
+}
+
+.sheet-skills .sheet-inspiration .inspiration-label,
+.sheet-skills .sheet-proficiency .proficiency-label {
+  margin-left: 1em;
+}
+
+.sheet-skills .skills,
+.sheet-skills .saving-throws {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 2px;
+  border: solid 1px;
+  text-align: center;
+}
+
+.sheet-skills .skills h2,
+.sheet-skills .saving-throws h2 {
+  font-size: 0.7em;
+}
+
+.sheet-skills .skills .skills-list,
+.sheet-skills .saving-throws .saving-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 0.2em;
+  margin: 0;
+}
+
+.sheet input {
+  background: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.wisdom-and-proficiencies {
+  grid-column: span 2;
+}
+
+.wisdom-and-proficiencies .passive-wisdom input {
+  width: 15%;
+  margin-right: 1em;
+}
+
+.combat-and-bag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sheet input::-webkit-outer-spin-button,
+.sheet input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

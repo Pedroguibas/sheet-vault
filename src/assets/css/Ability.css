@@ -1,0 +1,20 @@
+.ability-container {
+  position: relative;
+}
+
+.ability-name {
+  position: absolute;
+  font-size: 0.75em;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+}
+
+.ability-input {
+  aspect-ratio: 1/1;
+  font-size: 1.5em;
+  text-align: center;
+  width: 100%;
+}

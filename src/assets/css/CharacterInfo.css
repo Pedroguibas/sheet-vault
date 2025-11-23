@@ -1,0 +1,35 @@
+.sheet .character-info {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: center;
+  margin-bottom: 2em;
+  gap: 1.5em;
+  border: 1px solid var(--highlight);
+  padding: 1em;
+}
+
+.character-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.character-info .character-name {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+}
+
+.character-info .character-name input {
+  padding: 4px;
+  font-size: 1.2em;
+}
+
+.character-info .character-info-input-conteier {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-info .character-info-input-container input {
+  width: 100%;
+}

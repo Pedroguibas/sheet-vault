@@ -1,0 +1,102 @@
+.sheet-combat {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+
+.sheet-combat .combat-first-line {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.sheet-combat .combat-first-line input {
+  font-size: 1.5em;
+  text-align: center;
+  aspect-ratio: 1/1;
+}
+
+.sheet-combat input {
+  width: 100%;
+}
+
+.hp,
+.temp-hp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--text-primary);
+}
+
+.hp .max-hp,
+.hp .current-hp label,
+.temp-hp label,
+.death-saves-container label,
+.death-saves-container h2 {
+  width: 100%;
+
+  font-size: 0.6em;
+}
+
+.hp .max-hp input {
+  text-align: center;
+  width: 60%;
+}
+
+.hp .current-hp {
+  width: 95%;
+}
+
+.hp .current-hp input,
+.temp-hp input {
+  text-align: center;
+  height: 3em;
+}
+
+.death-saves-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.death-saves-container input {
+  width: 90%;
+}
+
+.death-saves-container div {
+  border: 1px solid var(--text-primary);
+}
+
+.death-saves-container .death-saves .successes,
+.death-saves-container .death-saves .failures {
+  display: flex;
+  justify-content: center;
+}
+
+.death-saves-container .death-saves .successes input,
+.death-saves-container .death-saves .failures input {
+  width: fit-content;
+}
+
+.money {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0.3em;
+
+  & div {
+    border: 1px solid var(--text-primary);
+  }
+}
+
+.sheet-combat .money div input {
+  border: none;
+  width: 80%;
+  background: transparent;
+}
