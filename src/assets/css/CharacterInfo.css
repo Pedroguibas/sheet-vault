@@ -1,4 +1,4 @@
-.character-info {
+.sheet .character-info {
   grid-column: span 3;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;

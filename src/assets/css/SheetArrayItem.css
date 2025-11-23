@@ -31,3 +31,15 @@
   background: var(--highlight);
   transition: background 300ms ease;
 }
+
+.sheet-array-item h2 {
+  font-size: 0.7em;
+}
+
+.sheet-array-item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 2px;
+  border: solid 1px;
+  text-align: center;
+}

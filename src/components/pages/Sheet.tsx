@@ -4,12 +4,15 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import Ability from "../Sheet/Ability.tsx";
 import Skills from "../Sheet/Skills.tsx";
 import SavingThrows from "../Sheet/SavingThrows.tsx";
+import AttacksAndSpellsArray from "../Sheet/AttacksAndSpellsArray.tsx";
 import type { SheetType } from "./MySheets.tsx";
 import type { SessionType } from "../../App.tsx";
 import type React from "react";
 import "../../assets/css/Sheet.css";
 import SheetArrayItem from "../Sheet/SheetArrayItem.tsx";
 import CharacterInfo from "../Sheet/CharacterInfo.tsx";
+import Combat from "../Sheet/Combat.tsx";
+import MoreInfo from "../Sheet/MoreInfo.tsx";
 
 type SheetPropsType = {
   session: SessionType;
@@ -67,7 +70,7 @@ const Sheet = ({ session }: SheetPropsType) => {
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setSheet((prev) => {
-      const updated_proficiencies = [...prev!.other_proficiencies];
+      let updated_proficiencies = [...prev!.other_proficiencies];
       updated_proficiencies[Number(e.target.id)] = e.target.value;
 
       return {
@@ -79,7 +82,7 @@ const Sheet = ({ session }: SheetPropsType) => {
 
   const handleAddProficiency = (newProficiency: string) => {
     setSheet((prev) => {
-      const updated_proficiencies = [...prev!.other_proficiencies];
+      let updated_proficiencies = [...prev!.other_proficiencies];
       updated_proficiencies.push(newProficiency);
 
       return {
@@ -100,6 +103,10 @@ const Sheet = ({ session }: SheetPropsType) => {
       };
     });
   };
+
+  useEffect(() => {
+    if (sheet) console.log(sheet.combat.attacks_and_spells);
+  }, [sheet]);
 
   if (sheet) {
     return (
@@ -203,6 +210,9 @@ const Sheet = ({ session }: SheetPropsType) => {
               />
             </div>
           </div>
+          <Combat sheet={sheet} setSheet={setSheet} />
+          <MoreInfo sheet={sheet} setSheet={setSheet} />
+          <AttacksAndSpellsArray sheet={sheet} setSheet={setSheet} />
         </div>
       </section>
     );

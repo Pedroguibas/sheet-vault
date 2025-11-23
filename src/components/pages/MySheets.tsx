@@ -19,7 +19,7 @@ export type SheetType = {
     ideals: string;
     bonds: string;
     flaws: string;
-    features_and_traits: string;
+    features_and_traits: string[];
   };
   abilities: {
     strength: number;
@@ -78,7 +78,7 @@ export type SheetType = {
     attacks_and_spells: {
       attack_name: string;
       attack_bonus: number;
-      damage: number;
+      damage: string;
       damage_type: string;
     }[];
   };

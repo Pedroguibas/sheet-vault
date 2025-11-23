@@ -2,6 +2,7 @@
   max-width: 45rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
 }
 
 .sheet .sheet-textarea {
@@ -48,8 +49,7 @@
 }
 
 .sheet-skills .skills,
-.sheet-skills .saving-throws,
-.wisdom-and-proficiencies .sheet-array-item {
+.sheet-skills .saving-throws {
   display: flex;
   flex-direction: column;
   padding: 5px 2px;
@@ -58,8 +58,7 @@
 }
 
 .sheet-skills .skills h2,
-.sheet-skills .saving-throws h2,
-.wisdom-and-proficiencies .sheet-array-item h2 {
+.sheet-skills .saving-throws h2 {
   font-size: 0.7em;
 }
 
@@ -86,8 +85,14 @@
   margin-right: 1em;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.combat-and-bag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sheet input::-webkit-outer-spin-button,
+.sheet input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
