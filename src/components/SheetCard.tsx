@@ -14,15 +14,25 @@ const SheetCard = ({ sheet }: SheetCardPropsType) => {
   };
 
   return (
-    <button onClick={handleClick} className="sheet-card">
-      <span className="character-name">{sheet.character.character_name}</span>
-      <div className="character-info">
-        <span className="character-class">
-          {sheet.character.character_class}
+    <li className="sheet-card">
+      <button onClick={handleClick}>
+        <span className="character-name">
+          {sheet.character.character_name == ""
+            ? "Sem nome"
+            : sheet.character.character_name}
         </span>
-        <span className="character-race">{sheet.character.race}</span>
-      </div>
-    </button>
+        <div className="character-info">
+          <span className="character-class">
+            {sheet.character.character_class == ""
+              ? "Sem classe"
+              : sheet.character.character_class}
+          </span>
+          <span className="character-race">
+            {sheet.character.race == "" ? "Sem raça" : sheet.character.race}
+          </span>
+        </div>
+      </button>
+    </li>
   );
 };
 

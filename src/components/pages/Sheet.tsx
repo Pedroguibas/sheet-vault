@@ -115,10 +115,31 @@ const Sheet = ({ session }: SheetPropsType) => {
     });
   };
 
+  const handleDelete = async () => {
+    if (window.confirm("Tem certeza que quer deletar esta ficha?")) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_BACKEND_URL}/api/sheets/${searchParams.get(
+            "sheet"
+          )}`
+        );
+        window.alert("Ficha deletada com sucesso!");
+        navigate("/minhasfichas");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
   if (sheet) {
     return (
       <section className="sheet-section section-container">
         <div className="sheet">
+          <div className="delete-btn-container">
+            <button onClick={handleDelete} className="delete-btn">
+              Deletar Ficha
+            </button>
+          </div>
           <CharacterInfo sheet={sheet} setSheet={setSheet} />
           <div className="sheet-abilities-and-skills">
             <div className="sheet-abilities">
